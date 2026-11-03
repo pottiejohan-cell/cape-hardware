@@ -1,0 +1,5 @@
+node_modules/
+android/
+store/out/
+www/fonts/
+.DS_Store

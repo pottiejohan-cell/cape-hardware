@@ -1,0 +1,11 @@
+{
+  "appId": "com.capehardware.game",
+  "appName": "Cape Hardware",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#0c0a10"
+  },
+  "plugins": {
+    "SystemBars": { "insetsHandling": "native" }
+  }
+}

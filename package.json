@@ -1,0 +1,28 @@
+{
+  "name": "cape-hardware",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cape Hardware: an ex drug lord builds a legal building-materials empire across the Cape.",
+  "scripts": {
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "build": "node scripts/build.mjs",
+    "icons": "node assets/render-icons.mjs",
+    "store-assets": "node scripts/store-assets.mjs"
+  },
+  "dependencies": {
+    "@capacitor-community/admob": "^8.0.0",
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "cordova-plugin-purchase": "^13.12.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.0.0",
+    "playwright": "^1.48.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

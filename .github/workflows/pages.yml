@@ -1,0 +1,42 @@
+name: Publish web version and privacy policy
+
+# Puts the game and privacy policy on GitHub Pages:
+#   https://<your-username>.github.io/cape-hardware/
+#   https://<your-username>.github.io/cape-hardware/privacy.html  (use this link in the Play Console)
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Bundle fonts and build the game page
+        run: |
+          node scripts/fetch-fonts.mjs
+          node scripts/build.mjs
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: www
+      - id: deployment
+        uses: actions/deploy-pages@v4
