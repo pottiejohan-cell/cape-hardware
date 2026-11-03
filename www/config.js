@@ -13,11 +13,11 @@ window.CH_CONFIG = {
   // Player feedback. Fill in ONE of these:
   // 1) A Google Form (best: every message lands in a Google Sheet). Paste the form's
   //    formResponse address and the entry IDs of its five questions.
-  feedbackForm: null,
-  // feedbackForm: {
-  //   url: 'https://docs.google.com/forms/d/e/FORM_ID/formResponse',
-  //   fields: { type: 'entry.111', rating: 'entry.222', message: 'entry.333', name: 'entry.444', context: 'entry.555' }
-  // },
-  // 2) Or an email address. The player's email app opens with the message filled in.
+  feedbackForm: {
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLSdyQEyXh779MeLpOoQiyUdYuexltnSUS-haBLz--b5v8uGWRg/formResponse',
+    fields: { type: 'entry.571928451', rating: 'entry.685400119', message: 'entry.695785256', name: 'entry.1793552648', context: 'entry.963264864' }
+  },
+  // Responses land in the Google Sheet "Cape Hardware feedback (responses)" in your Drive.
+  // 2) Or an email address instead (leave empty while the form is used).
   feedbackEmail: ''
 };

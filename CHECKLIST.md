@@ -35,7 +35,7 @@ Tick these off in order. Steps marked **(Claude)** are ones Claude can do for yo
 
 The Feedback app in the game needs somewhere to send messages. Pick one and tell Claude, who will fill it in `www/config.js` **(Claude)**:
 
-- [ ] **Google Form (recommended):** a free form with five questions (Type, Rating, Message, Name, Details). Every message lands as a row in a Google Sheet you can sort and filter. Claude can make the form with you.
+- [x] **Google Form (done, 3 Nov 2026):** "Cape Hardware feedback" form, responses in the Google Sheet "Cape Hardware feedback (responses)" in your Drive. Originally described as: a free form with five questions (Type, Rating, Message, Name, Details). Every message lands as a row in a Google Sheet you can sort and filter. Claude can make the form with you.
 - [ ] **Or an email address:** the player's email app opens with the message filled in. Use an address you don't mind being public, such as a new Gmail just for the game.
 
 Until one is set, feedback in test builds is only saved on the phone.
