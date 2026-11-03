@@ -31,6 +31,15 @@ Tick these off in order. Steps marked **(Claude)** are ones Claude can do for yo
 - [ ] `www/privacy.html`: replace `[PUBLISHER NAME]`, `[CONTACT EMAIL]` and `[PUBLISHER ADDRESS]`. Google requires a working contact email.
 - [ ] `capacitor.config.json`: confirm the app ID `com.capehardware.game`. **It can never change after the first upload to Play**, so change it now if you want something else (for example, under Multi Entity Group).
 
+## 4b. Where player feedback goes
+
+The Feedback app in the game needs somewhere to send messages. Pick one and tell Claude, who will fill it in `www/config.js` **(Claude)**:
+
+- [ ] **Google Form (recommended):** a free form with five questions (Type, Rating, Message, Name, Details). Every message lands as a row in a Google Sheet you can sort and filter. Claude can make the form with you.
+- [ ] **Or an email address:** the player's email app opens with the message filled in. Use an address you don't mind being public, such as a new Gmail just for the game.
+
+Until one is set, feedback in test builds is only saved on the phone.
+
 ## 5. Google Play developer account (US$25 once-off)
 
 - [ ] Sign up at play.google.com/console and verify your identity.

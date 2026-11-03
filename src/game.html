@@ -158,7 +158,7 @@ p{margin:0}
 .bal span{display:block;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .bal b{font-family:var(--f-mono);font-size:.92rem;overflow-wrap:anywhere}
 label{display:block;font-size:.76rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
-input[type=number],input[type=text],select{width:100%;font:inherit;font-family:var(--f-mono);font-size:1.05rem;padding:10px 12px;border:0;border-radius:12px;background:var(--card2);color:var(--ink);margin-bottom:10px}
+input[type=number],input[type=text],input[type=email],select,textarea{width:100%;font:inherit;font-family:var(--f-mono);font-size:1.05rem;padding:10px 12px;border:0;border-radius:12px;background:var(--card2);color:var(--ink);margin-bottom:10px}
 input[type=range]{width:100%;accent-color:var(--c,var(--accent))}
 .lv{display:flex;gap:4px;margin-top:6px}
 .lv i{width:24px;height:7px;border-radius:4px;background:var(--card2)}
@@ -244,6 +244,18 @@ input[type=range]{width:100%;accent-color:var(--c,var(--accent))}
 .sw.on{background:var(--c-msg)}
 .sw.on::after{left:23px}
 .howto p{margin-bottom:8px;font-size:.92rem;color:#ddd5cc}
+textarea{font-family:var(--f-body);font-size:1rem;min-height:130px;resize:vertical;line-height:1.45}
+.seg{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.seg button{background:var(--card2);border-radius:12px;padding:10px;font-weight:800;font-size:.9rem;border:2px solid transparent;text-align:left}
+.seg button small{display:block;font-weight:600;color:var(--muted);font-size:.76rem}
+.seg button[aria-pressed="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,var(--card2))}
+.stars{display:flex;gap:6px;margin-bottom:12px}
+.stars button{font-size:1.9rem;line-height:1;color:var(--card2);padding:2px}
+.stars button.on{color:var(--warn)}
+.sent{display:grid;gap:8px}
+.sent div{background:var(--card2);border-radius:12px;padding:10px 12px;font-size:.88rem}
+.sent b{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.addr{font-family:var(--f-mono);user-select:text;-webkit-user-select:text;background:var(--card2);border-radius:10px;padding:8px 10px;overflow-wrap:anywhere}
 .adov{position:absolute;inset:0;z-index:60;background:#0b0a0e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center}
 .adov .adtag{position:absolute;top:16px;left:16px;font-family:var(--f-mono);font-size:.72rem;font-weight:700;background:var(--warn);color:#2a1e00;border-radius:6px;padding:3px 8px}
 .adov .adx{position:absolute;top:12px;right:14px;font-family:var(--f-mono);font-weight:700;font-size:.85rem;background:rgba(255,255,255,.12);border-radius:999px;padding:7px 12px}
@@ -773,9 +785,10 @@ const IC={
  garage:'<svg viewBox="0 0 24 24" fill="none" stroke="#14121a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16V7h11v9"/><path d="M13 10h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/></svg>',
  msg:'<svg viewBox="0 0 24 24" fill="none" stroke="#14121a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L3 21l1.4-5.4A8.5 8.5 0 1 1 21 12z"/></svg>',
  news:'<svg viewBox="0 0 24 24" fill="none" stroke="#14121a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h3v10a2 2 0 0 1-2 2"/><path d="M8 8h5M8 12h5M8 16h5"/></svg>',
+ fb:'<svg viewBox="0 0 24 24" fill="none" stroke="#14121a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg>',
  set:'<svg viewBox="0 0 24 24" fill="none" stroke="#14121a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>'
 };
-const APPS={market:['Trade','var(--c-market)'],maps:['Maps','var(--c-maps)'],bank:['Bank','var(--c-bank)'],yard:['Yard','var(--c-yard)'],garage:['Garage','var(--c-garage)'],msg:['Messages','var(--c-msg)'],news:['Cape Wire','var(--c-news)'],set:['Settings','var(--c-set)']};
+const APPS={market:['Trade','var(--c-market)'],maps:['Maps','var(--c-maps)'],bank:['Bank','var(--c-bank)'],yard:['Yard','var(--c-yard)'],garage:['Garage','var(--c-garage)'],msg:['Messages','var(--c-msg)'],news:['Cape Wire','var(--c-news)'],fb:['Feedback','var(--warn)'],set:['Settings','var(--c-set)']};
 function truckSvg(){return `<svg class="truck" viewBox="0 0 120 56" aria-hidden="true"><rect x="4" y="16" width="62" height="26" rx="3" fill="#d9a441"/><rect x="8" y="10" width="54" height="8" fill="#8b93a6"/><path d="M66 22h24l14 12v8H66z" fill="#f4efe7"/><path d="M72 26h15l8 8H72z" fill="#5aa9ff"/><rect x="0" y="40" width="112" height="5" rx="2" fill="#2a2634"/><circle cx="22" cy="46" r="8" fill="#14121a"/><circle cx="22" cy="46" r="3" fill="#8b93a6"/><circle cx="92" cy="46" r="8" fill="#14121a"/><circle cx="92" cy="46" r="3" fill="#8b93a6"/></svg>`}
 
 /* ================= status bar ================= */
@@ -794,7 +807,7 @@ function refresh(){draw(true)}
 function draw(keep){
  statusBar();
  const sc=$('#screen');const top=sc.scrollTop;
- const fn={lock:vLock,home:vHome,market:vMarket,maps:vMaps,bank:vBank,yard:vYard,garage:vGarage,msg:vMsg,news:vNews,set:vSet,end:vEnd}[V.app]||vHome;
+ const fn={lock:vLock,home:vHome,market:vMarket,maps:vMaps,bank:vBank,yard:vYard,garage:vGarage,msg:vMsg,news:vNews,fb:vFeedback,set:vSet,end:vEnd}[V.app]||vHome;
  fn();
  sc.scrollTop=keep?top:0;
 }
@@ -822,7 +835,7 @@ function vLock(){
    <button class="big ${can?'':'hot'}" id="s30"><span>30-day hustle<small>Pay Sakkie back and go legit, fast</small></span><span class="ar">›</span></button>
    <button class="big" id="s60"><span>60-day empire${MON.full?'':'<span class="lk">Full version</span>'}<small>Time to build a yard, a crew and a fleet</small></span><span class="ar">${MON.full?'›':'🔒'}</span></button>
   </div>
-  <div class="lockfoot"><button class="linkish" id="howl">How to play</button> <button class="linkish" id="hofl">Hall of fame</button>${MON.full?'':' <button class="linkish" id="upl">Remove ads</button>'}</div>
+  <div class="lockfoot"><button class="linkish" id="howl">How to play</button> <button class="linkish" id="hofl">Hall of fame</button> <button class="linkish" data-go="fb">Feedback</button>${MON.full?'':' <button class="linkish" id="upl">Remove ads</button>'}</div>
  </div>`;
  if(can)$('#cont').onclick=()=>{S=load();play('unlock');S.over?go('end'):go('home')};
  $('#s30').onclick=()=>{clearSave();newGame(30)};
@@ -853,7 +866,7 @@ function vHome(){
    ${y?`<div class="wg wide"><p class="l">Yard</p><p class="s" style="white-space:normal">${yardUsed()}/${yardCap()} space · ${y.crew} crew · ${y.driver?(y.run?`driver ${y.run.type==='collect'?'collecting in':'delivering to'} ${P(y.run.to).name}`:'driver waiting'):'no driver'}${S.extort>=S.day?' · gang threat':''}</p></div>`:''}
    ${S.tip?`<div class="wg wide"><p class="l">Tip-off</p><p class="s" style="white-space:normal">${G(S.tip.good).name} wanted in ${P(S.tip.place).name} by day ${S.tip.until}</p></div>`:''}
   </div>
-  <div class="apps">${appBtn('yard')}${appBtn('garage')}${appBtn('news',newsN)}${appBtn('set')}</div>
+  <div class="apps">${appBtn('yard')}${appBtn('garage')}${appBtn('news',newsN)}${appBtn('fb')}${appBtn('set')}</div>
   <div class="dock">${appBtn('market')}${appBtn('maps')}${appBtn('msg')}${appBtn('bank')}</div>
  </div>`;
 }
@@ -1058,15 +1071,85 @@ function vNews(){
  const items=S.log.slice().reverse();
  $('#screen').innerHTML=page('news','<span class="chip">Live</span>',`<div class="news">${items.length?items.map(l=>`<div class="ni ${l.k==='news'?'':'mine'}"><p class="k">${l.k==='news'?'Market news':'Your day'} · day ${l.d}</p><p>${l.t}</p></div>`).join(''):'<p class="fine">Nothing yet.</p>'}</div>`);
 }
+/* ================= feedback ================= */
+const FB_KEY='capehw-feedback';
+const FB_TYPES=[['idea','Idea','Something to add'],['bug','Bug','Something broke'],['balance','Balance','Too easy or too hard'],['other','Other','Anything else']];
+const FB={type:'idea',stars:0,msg:'',name:''};
+function fbSent(){try{return JSON.parse(localStorage.getItem(FB_KEY)||'[]')}catch(e){return[]}}
+function fbContext(){
+ const ver=MON.full?'Full':'Free';
+ const run=S?`Day ${S.day}/${S.days}, ${here()}, ${R(S.cash)} cash, heat ${S.heat}`:'No run in progress';
+ const ua=(navigator.userAgent.match(/Android [\d.]+|iPhone OS [\d_]+|Windows NT [\d.]+|Mac OS X [\d_]+/)||['Unknown device'])[0];
+ return `${ver} version · ${NATIVE()?'Android app':'Web'} · ${ua} · ${run}`;
+}
+async function fbSend(entry){
+ const C=window.CH_CONFIG||{},f=C.feedbackForm;
+ if(f&&f.url&&f.fields){
+  const d=new URLSearchParams();
+  d.append(f.fields.type,entry.typeName);d.append(f.fields.rating,String(entry.stars||''));d.append(f.fields.message,entry.msg);
+  if(f.fields.name)d.append(f.fields.name,entry.name||'');if(f.fields.context)d.append(f.fields.context,entry.ctx);
+  await fetch(f.url,{method:'POST',mode:'no-cors',body:d});
+  return 'form';
+ }
+ if(C.feedbackEmail)return 'email';
+ return 'local';
+}
+function vFeedback(msg){
+ const sent=fbSent(),C=window.CH_CONFIG||{};
+ const back=S?'home':'lock';
+ $('#screen').innerHTML=page('fb','<span class="chip">To the developer</span>',`
+  ${msg?`<p class="msg" style="--c:var(--good)">${msg}</p>`:''}
+  <div class="card">
+   <label>What is it about?</label>
+   <div class="seg">${FB_TYPES.map(t=>`<button data-ft="${t[0]}" aria-pressed="${FB.type===t[0]}">${t[1]}<small>${t[2]}</small></button>`).join('')}</div>
+   <label>How much are you enjoying Cape Hardware?</label>
+   <div class="stars" role="group" aria-label="Rating">${[1,2,3,4,5].map(n=>`<button data-st="${n}" class="${n<=FB.stars?'on':''}" aria-label="${n} star${n>1?'s':''}">★</button>`).join('')}</div>
+   <label for="fbm">Your message</label>
+   <textarea id="fbm" maxlength="1500" placeholder="${FB.type==='bug'?'What happened, and what were you doing just before?':FB.type==='balance'?'What felt too easy or too hard? Prices, debt, heat, events…':'Tell us your idea: new towns, materials, vehicles, temptations…'}">${esc(FB.msg)}</textarea>
+   <label for="fbn">Your name or email (optional, if you'd like a reply)</label>
+   <input id="fbn" type="text" maxlength="80" value="${esc(FB.name)}" placeholder="Optional">
+   <p class="fine" style="margin-bottom:10px">We also send your game version, device type and current day, to help fix bugs. Nothing else.</p>
+   <button class="btn p" id="fbs" style="--c:var(--warn);width:100%;padding:13px">Send feedback</button>
+  </div>
+  ${sent.length?`<div class="card"><h4>You've sent</h4><div class="sent">${sent.slice(-5).reverse().map(x=>`<div><b>${esc(x.typeName)}${x.stars?' · '+'★'.repeat(x.stars):''} · ${esc(x.date)}</b><p>${esc(x.msg)}</p></div>`).join('')}</div></div>`:''}`,back);
+ $('#screen').querySelectorAll('[data-ft]').forEach(b=>b.onclick=()=>{FB.msg=$('#fbm').value;FB.name=$('#fbn').value;FB.type=b.dataset.ft;play('tap');vFeedback()});
+ $('#screen').querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{FB.msg=$('#fbm').value;FB.name=$('#fbn').value;FB.stars=+b.dataset.st;play('tap');vFeedback()});
+ $('#fbm').oninput=e=>FB.msg=e.target.value;$('#fbn').oninput=e=>FB.name=e.target.value;
+ $('#fbs').onclick=async()=>{
+  const m=$('#fbm').value.trim();
+  if(m.length<3){play('err');toast('Write a short message first');$('#fbm').focus();return}
+  const t=FB_TYPES.find(x=>x[0]===FB.type);
+  const entry={type:FB.type,typeName:t[1],stars:FB.stars,msg:m,name:$('#fbn').value.trim(),ctx:fbContext(),date:new Date().toLocaleDateString('en-ZA')};
+  $('#fbs').disabled=true;
+  let via='local';try{via=await fbSend(entry)}catch(e){via=(window.CH_CONFIG||{}).feedbackEmail?'email':'local'}
+  const a=fbSent();a.push(entry);try{localStorage.setItem(FB_KEY,JSON.stringify(a.slice(-20)))}catch(e){}
+  FB.msg='';FB.stars=0;
+  if(via==='email'){
+   const addr=(window.CH_CONFIG||{}).feedbackEmail;
+   const body=`${entry.msg}\n\nRating: ${entry.stars?entry.stars+'/5':'not given'}\nFrom: ${entry.name||'not given'}\n${entry.ctx}`;
+   const href=`mailto:${addr}?subject=${encodeURIComponent('Cape Hardware feedback: '+entry.typeName)}&body=${encodeURIComponent(body)}`;
+   play('ping');
+   openSheet(`<h3>Send by email</h3><p>Your email app should open with the message ready. If it doesn't, copy it and send it to:</p><p class="addr">${esc(addr)}</p><div class="acts"><button class="btn" id="fcp">Copy message</button><a class="btn p" href="${href}" id="fml" style="--c:var(--warn);text-decoration:none">Open email</a></div>`);
+   $('#fcp').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(`To: ${addr}\n\n${body}`).then(()=>toast('Copied'),()=>toast('Copy not allowed here'))};
+   location.href=href;
+   vFeedback('Thanks! Your feedback is ready to send.');return;
+  }
+  play('win');
+  vFeedback(via==='form'?'Thanks! Your feedback was sent to the developer.':'Thanks! Test mode: your feedback is saved on this phone only. In the app it goes straight to the developer.');
+ };
+}
+
 function vSet(){
  $('#screen').innerHTML=page('set','',`
   <div class="card"><h4>Version</h4><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span><span class="vtag ${MON.full?'full':''}">${MON.full?'Full version':'Free version'}</span><span class="fine" style="display:block;margin-top:6px">${MON.full?'60-day mode unlocked, no ads.':'30-day mode with a few ads.'}</span></span>${MON.full?'':'<button class="btn p" id="upg" style="--c:var(--good)">Get full version</button>'}</div>
    ${NATIVE()&&!(window.CHNative&&window.CHNative.debug)?'':`<button class="tgl" id="tst" style="border-top:1px solid var(--line);margin-top:12px"><span>Tester: pretend I bought it<small class="fine" style="display:block;font-weight:600">Switches between free and full to test both</small></span><span class="sw ${MON.full?'on':''}" aria-hidden="true"></span></button>`}</div>
   <div class="card"><button class="tgl" id="snd"><span>Sound effects</span><span class="sw ${SND.on?'on':''}" aria-hidden="true"></span></button></div>
+  <div class="card"><h4>Feedback and ideas</h4><p class="fine" style="margin-bottom:10px">Found a bug, or got an idea for the game? Send it straight to the developer.</p><button class="btn p" data-go="fb" style="--c:var(--warn)">Send feedback</button>${NATIVE()?' <button class="btn" id="rate">Rate on Google Play</button>':''}</div>
   <div class="card"><h4>How to play</h4>${howTo()}</div>
   <div class="card"><h4>Hall of fame</h4>${hof()||'<p class="fine">No scores yet.</p>'}</div>
   <div class="card"><h4>End this run</h4><p class="fine" style="margin-bottom:10px">Your score is cash, bank, your vehicle and yard at resale, and leftover stock at half cost, minus what you owe Sakkie.</p><button class="btn d" id="quit">Call it quits now</button></div>`);
  const ug=$('#upg');if(ug)ug.onclick=()=>unlockSheet();
+ const rt=$('#rate');if(rt)rt.onclick=()=>{location.href='market://details?id='+((window.CH_CONFIG&&CH_CONFIG.appId)||'com.capehardware.game')};
  const ts=$('#tst');if(ts)ts.onclick=()=>{setFull(!MON.full);play('tap');toast(MON.full?'Testing as full version':'Testing as free version');draw(true)};
  $('#snd').onclick=()=>{SND.on=!SND.on;try{localStorage.setItem('capehw-sound',SND.on?'on':'off')}catch(e){}if(SND.on)play('ping');draw(true)};
  $('#quit').onclick=()=>{openSheet(`<h3>Call it quits?</h3><p>The run ends now and your score is counted.</p><div class="acts"><button class="btn" id="qn">Keep playing</button><button class="btn d" id="qy">End now</button></div>`);$('#qn').onclick=closeSheet;$('#qy').onclick=()=>{closeSheet();endGame('time');finish()}};
@@ -1102,6 +1185,7 @@ function vEnd(){
   ${S.end.saved?'':`<div class="card"><label for="nm">Your name for the hall of fame</label><input id="nm" type="text" maxlength="18" placeholder="Name"><button class="btn p" id="sv">Save score</button></div>`}
   <div class="card"><h4>Hall of fame</h4>${hof()||'<p class="fine">No scores yet.</p>'}</div>
   ${MON.full?'':`<div class="card"><h4>Ready for more?</h4><p style="margin-bottom:10px">The 60-day empire mode gives you time to build a fleet and a yard full of crew. No ads, ${MON.price} once-off.</p><button class="btn p" id="upe" style="--c:var(--good)">Get the full version</button></div>`}
+  <div class="card"><h4>How was that run?</h4><p style="margin-bottom:10px">Tell the developer what to fix or add next.</p><button class="btn" data-go="fb">Send feedback</button></div>
   <button class="btn p" id="again" style="padding:14px">Start over</button>`,'lock');
  const sv=$('#sv');if(sv)sv.onclick=()=>{
   const nm=($('#nm').value.trim()||'Anonymous').slice(0,18);
