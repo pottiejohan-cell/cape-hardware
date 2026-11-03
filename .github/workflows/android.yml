@@ -8,6 +8,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   android:
     runs-on: ubuntu-latest
@@ -64,6 +67,16 @@ jobs:
         with:
           name: cape-hardware-test-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Publish test APK as a direct phone download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk cape-hardware-test.apk
+          gh release delete test-build --yes --cleanup-tag || true
+          gh release create test-build cape-hardware-test.apk --prerelease \
+            --title "Test build ${{ github.run_number }}" \
+            --notes "Latest test version of Cape Hardware for your phone. Not for the Play Store."
 
       - name: Build signed release bundle for Google Play
         if: ${{ env.KEYSTORE_BASE64 != '' }}
