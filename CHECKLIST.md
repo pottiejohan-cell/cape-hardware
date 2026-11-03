@@ -5,7 +5,7 @@ Tick these off in order. Steps marked **(Claude)** are ones Claude can do for yo
 ## 1. Test the free and full versions (now, no cost)
 
 - [ ] Play the Cape Hardware page in Claude. It starts as the free version.
-- [ ] Try the 60-day button (it opens the unlock screen), the test ads at day 11, day 21 and the end of a run, the "Watch ad: free repair" breakdown option and the "Watch ad for a tip-off" card in Maps.
+- [ ] Try the 60-day button (it opens the unlock screen), the test ad at the end of a run, the "Watch ad: free repair" breakdown option and the "Watch ad for a tip-off" card in Maps.
 - [ ] In Settings, use **Tester: pretend I bought it** to switch between free and full.
 - [ ] Decide on the price. R49 is in the game now; it can be changed later.
 

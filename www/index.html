@@ -344,7 +344,7 @@ async function buyFull(){if(NATIVE()){try{const ok=await window.CHNative.buy();i
 async function restoreFull(){if(NATIVE()){try{const ok=await window.CHNative.restore();if(ok)setFull(true);return !!ok}catch(e){return false}}return MON.full}
 function unlockSheet(msg){
  openSheet(`<p class="fine">Cape Hardware</p><h3>Get the full version</h3>
-  <ul class="perks"><li><span><b>60-day empire mode.</b> Twice the time to build a yard, a crew and a fleet.</span></li><li><span><b>No ads, ever.</b> Not between days, not at the end of a run.</span></li><li><span><b>Roadside cover.</b> One free breakdown repair every run.</span></li><li><span><b>Call your contact</b> for a tip-off without watching an ad.</span></li></ul>
+  <ul class="perks"><li><span><b>60-day empire mode.</b> Twice the time to build a yard, a crew and a fleet.</span></li><li><span><b>No ads, ever.</b> No ad at the end of a run, and no ads needed for perks.</span></li><li><span><b>Roadside cover.</b> One free breakdown repair every run.</span></li><li><span><b>Call your contact</b> for a tip-off without watching an ad.</span></li></ul>
   <p style="font-weight:800">${MON.price} once-off. Yours to keep.</p>
   ${NATIVE()?'':'<p class="fine">Test mode: no money is charged. This simulates the Google Play purchase so you can try the full version.</p>'}
   <p class="msg" id="umsg">${msg||''}</p>
@@ -498,8 +498,7 @@ function doTravel(id){
  Q=[];
  if(rep.length){rep.forEach(l=>log(l));Q.push({who:'Yard foreman',col:'var(--c-yard)',sub:`Day ${S.day} report`,text:rep.join('</p><p>'),actions:[{label:'Thanks',cls:'p'}]})}
  const e=rollEncounter();if(e)Q.push(e);
- save();go('home');
- if(!MON.full&&(S.day===11||S.day===21||S.day===41))setTimeout(()=>showInterstitial().then(runQueue),250);else setTimeout(runQueue,250);
+ save();go('home');setTimeout(runQueue,250);
 }
 function endGame(reason,text){S.over=true;S.end={reason,text:text||''};save()}
 function finish(){
