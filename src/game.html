@@ -475,12 +475,14 @@ function newGame(days){
  log('Day 1. Out of Pollsmoor. Your cousin hands over the Hilux keys and says nothing.');
  save();play('unlock');go('home');
 }
+let travelling=false;
 function travel(id){
+ if(travelling)return;travelling=true;
  closeSheet();play('engine');
  const name=P(id).name;
- $('#phone').insertAdjacentHTML('beforeend',`<div class="ov drive" id="drv"><p class="fine" style="color:#f1e2d2">Day ${S.day} → ${S.day+1}</p><h3>Driving to ${esc(name)}</h3><div class="road">${truckSvg()}</div><p style="color:#f1e2d2">${R(VEH[S.veh].fuel)} fuel for the ${rig()}</p></div>`);
+ $('#phone').insertAdjacentHTML('beforeend',`<div class="ov drive" id="driving"><p class="fine" style="color:#f1e2d2">Day ${S.day} → ${S.day+1}</p><h3>Driving to ${esc(name)}</h3><div class="road">${truckSvg()}</div><p style="color:#f1e2d2">${R(VEH[S.veh].fuel)} fuel for the ${rig()}</p></div>`);
  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
- setTimeout(()=>{const d=$('#drv');if(d)d.remove();doTravel(id)},reduce?350:1500);
+ setTimeout(()=>{const d=$('#driving');if(d)d.remove();try{doTravel(id)}finally{travelling=false}},reduce?350:1500);
 }
 function doTravel(id){
  S.day++;S.loc=id;
@@ -1199,7 +1201,7 @@ function vEnd(){
 /* Android back button (used by the app version) */
 window.CHBack=()=>{
  if($('#scrim')){closeSheet();return true}
- if($('#chat')||$('#adov')||$('#drv'))return true;
+ if($('#chat')||$('#adov')||$('#driving'))return true;
  if(V.app==='msg'&&V.sub){go('msg');return true}
  if(V.app==='yard'&&V.sub){go('yard');return true}
  if(V.app==='lock'||V.app==='home')return false;
