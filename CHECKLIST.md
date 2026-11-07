@@ -28,8 +28,8 @@ Tick these off in order. Steps marked **(Claude)** are ones Claude can do for yo
 
 ## 4. Fill in the blanks
 
-- [ ] `www/privacy.html`: replace `[PUBLISHER NAME]`, `[CONTACT EMAIL]` and `[PUBLISHER ADDRESS]`. Google requires a working contact email.
-- [ ] `capacitor.config.json`: confirm the app ID `com.capehardware.game`. **It can never change after the first upload to Play**, so change it now if you want something else (for example, under Multi Entity Group).
+- [x] `www/privacy.html`: publisher Johan Potgieter, contact capehardwaregame@gmail.com.
+- [x] `capacitor.config.json`: app ID confirmed as `com.capehardware.game`. Was: confirm the app ID `com.capehardware.game`. **It can never change after the first upload to Play**, so change it now if you want something else (for example, under Multi Entity Group).
 
 ## 4b. Where player feedback goes
 
