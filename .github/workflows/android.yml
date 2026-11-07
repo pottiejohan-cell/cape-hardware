@@ -46,7 +46,7 @@ jobs:
         env:
           ADMOB_APP_ID: ${{ secrets.ADMOB_APP_ID }}
         run: |
-          APP_ID="${ADMOB_APP_ID:-ca-app-pub-3940256099942544~3347511713}"
+          APP_ID="${ADMOB_APP_ID:-ca-app-pub-7785194950093620~4079791245}"  # Cape Hardware app in AdMob (capehardwaregame@gmail.com)
           MANIFEST=android/app/src/main/AndroidManifest.xml
           sed -i "s#</application>#<meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"$APP_ID\"/>\n</application>#" "$MANIFEST"
           sed -i "s#<activity#<activity android:screenOrientation=\"portrait\"#" "$MANIFEST"

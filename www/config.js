@@ -6,8 +6,8 @@ window.CH_CONFIG = {
   testAds: true,
   debug: true,
   productId: 'full_version',
-  interstitialId: '',   // e.g. ca-app-pub-XXXXXXXXXXXXXXXX/NNNNNNNNNN
-  rewardedId: '',       // e.g. ca-app-pub-XXXXXXXXXXXXXXXX/NNNNNNNNNN
+  interstitialId: 'ca-app-pub-7785194950093620/3370353967',   // AdMob unit "End of run"
+  rewardedId: 'ca-app-pub-7785194950093620/2327725874',       // AdMob unit "Repair and tip-off reward"
   appId: 'com.capehardware.game',
 
   // Player feedback. Fill in ONE of these:

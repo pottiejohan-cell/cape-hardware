@@ -49,11 +49,10 @@ Until one is set, feedback in test builds is only saved on the phone.
 
 ## 6. AdMob account (free)
 
-- [ ] Sign up at admob.google.com with the same Google account.
-- [ ] Add an app: Android, "Cape Hardware". Copy the **App ID** (`ca-app-pub-...~...`).
-- [ ] Create two ad units: one **Interstitial**, one **Rewarded**. Copy both ad unit IDs (`ca-app-pub-.../...`).
-- [ ] On GitHub: **Settings > Secrets and variables > Actions > New repository secret**, name `ADMOB_APP_ID`, value = the App ID.
-- [ ] In `www/config.js`: paste the two ad unit IDs and set `testAds: false` and `debug: false` **(Claude)**. Only do this for the release build; keep test ads while testing, because clicking your own real ads can get your AdMob account banned.
+- [x] AdMob account: capehardwaregame@gmail.com (approval pending, 7 Nov 2026).
+- [x] App added: Cape Hardware, App ID `ca-app-pub-7785194950093620~4079791245` (built into the workflow).
+- [x] Ad units: End of run (interstitial) and Repair and tip-off reward (rewarded), IDs in `www/config.js`.
+- [ ] Before launch: set `testAds: false` and `debug: false` in `www/config.js` **(Claude)**. Only do this for the release build; keep test ads while testing, because clicking your own real ads can get your AdMob account banned.
 
 ## 7. Signing key and first upload
 
