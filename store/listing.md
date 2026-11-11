@@ -31,7 +31,7 @@ THE OLD LIFE KEEPS CALLING. THIS IS CAPE TOWN, AFTER ALL.
 Old friends with "one parcel". Copper cable that came off a substation. A perlemoen run out of Hangklip. A roadblock officer who wants "something for a cooldrink". A municipal tender with a kickback. Gang money to wash through your books. Dirty deals pay big, but every one raises your parole heat. Let it get too hot and Mrs Jacobs sends you back inside.
 
 FREE TO PLAY
-Play the 30-day hustle free with a few short ads. Get the full version once-off to unlock the 60-day empire mode, remove all ads and get bonus perks.
+Play the 30-day hustle free, with one ad at the end of each run. Get the full version once-off to unlock the 60-day empire mode, remove all ads and get bonus perks.
 
 Cape Hardware is a satire of crime and redemption. It does not encourage any illegal activity.
 

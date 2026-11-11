@@ -4,6 +4,9 @@ name: Make Play Store screenshots
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   shots:
     runs-on: ubuntu-latest
@@ -22,3 +25,12 @@ jobs:
         with:
           name: play-store-graphics
           path: store/out
+      - name: Save graphics into the project (store/graphics)
+        run: |
+          mkdir -p store/graphics
+          cp store/out/*.png store/graphics/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add store/graphics
+          git commit -m "Update Play Store graphics [skip ci]" || echo "No changes"
+          git push
