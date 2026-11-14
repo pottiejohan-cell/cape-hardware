@@ -430,6 +430,9 @@ const buyMod=()=>S.haggle===1?.92:S.haggle===-1?1.08:1;
 const sellMod=()=>S.haggle===1?1.12:S.haggle===-1?.92:1;
 const buyP=id=>Math.round(S.prices[id]*buyMod());
 const sellP=id=>Math.round(S.prices[id]*sellMod());
+// Stock bought at this stop can't be flipped for a profit on the spot (haggle exploit fix)
+const freshQ=id=>Math.min(own(id),(S.fresh&&S.fresh[id])||0);
+const sellTot=(id,n)=>{const a=Math.min(n,own(id)-freshQ(id));return a*sellP(id)+(n-a)*Math.min(sellP(id),buyP(id))};
 function log(t,k){S.log.push({d:S.day,t,k:k||''});if(S.log.length>140)S.log.shift()}
 const here=()=>P(S.loc).name, rig=()=>VEH[S.veh].short;
 
@@ -489,7 +492,7 @@ function doTravel(id){
  if(S.debt>0)S.debt=Math.round(S.debt*DEBT_RATE);
  S.bank=Math.round(S.bank*BANK_RATE);
  const fuel=Math.min(S.cash,VEH[S.veh].fuel);S.cash-=fuel;
- S.heat=Math.max(0,S.heat-3);S.haggle=0;
+ S.heat=Math.max(0,S.heat-3);S.haggle=0;S.fresh={};
  if(S.tip&&S.day>S.tip.until)S.tip=null;
  arrive(id).forEach(n=>log(n,'news'));
  log(`Day ${S.day}. Drove to ${P(id).name}. Fuel ${R(fuel)}.`);
@@ -754,7 +757,7 @@ function qtySheet(mode,id,back){
  const g=G(id),free=capT()-used();
  let price=0,max=0,info='',why='',verb='';
  if(mode==='buy'){price=buyP(id);max=Math.max(0,Math.min(Math.floor(S.cash/price),Math.floor(free/g.sp)));info=`${R(price)} each · you can afford ${Math.floor(S.cash/price)} · room for ${Math.floor(free/g.sp)}`;why=S.cash<price?`You need ${R(price)} for one. You have ${R(S.cash)}.`:`No room on the ${rig()}. One takes ${g.sp} space and you have ${free} free.`;verb='Buy'}
- if(mode==='sell'){price=sellP(id);max=own(id);info=`${R(price)} each · you have ${max}`;why='You have none to sell.';verb='Sell'}
+ if(mode==='sell'){price=sellP(id);max=own(id);info=`${R(price)} each · you have ${max}`+(freshQ(id)&&sellP(id)>buyP(id)?` · the ${freshQ(id)} you just bought here only sell back at ${R(buyP(id))}`:'');why='You have none to sell.';verb='Sell'}
  if(mode==='unload'){const yf=yardCap()-yardUsed();max=Math.min(own(id),Math.floor(yf/g.sp));info=`On the ${rig()}: ${own(id)} · yard space free: ${yf}`;why=own(id)?'The yard is full.':`None on the ${rig()}.`;verb='Unload'}
  if(mode==='load'){max=Math.min(yq(id),Math.floor(free/g.sp));info=`In the yard: ${yq(id)} · room on the ${rig()}: ${Math.floor(free/g.sp)}`;why=yq(id)?`No room on the ${rig()}.`:'None in the yard.';verb='Load'}
  if(max<=0){play('err');openSheet(`<h3>Can't ${verb.toLowerCase()}</h3><p>${why}</p><div class="acts"><button class="btn p" id="qc">OK</button></div>`);$('#qc').onclick=closeSheet;return}
@@ -764,13 +767,13 @@ function qtySheet(mode,id,back){
   <p class="total" id="qt"></p>
   <div class="acts"><button class="btn" id="qc">Cancel</button><button class="btn p" id="qok" style="--c:var(--c-market)">${verb}</button></div>`);
  const r=$('#qr');
- const upd=()=>{const n=+r.value;$('#qv').textContent=n;$('#qt').textContent=price?`${mode==='buy'?'Cost':'You get'}: ${R(n*price)}`:`${n*g.sp} space`;$('#qok').disabled=n===0};
+ const upd=()=>{const n=+r.value;$('#qv').textContent=n;$('#qt').textContent=price?`${mode==='buy'?'Cost':'You get'}: ${R(mode==='sell'?sellTot(id,n):n*price)}`:`${n*g.sp} space`;$('#qok').disabled=n===0};
  r.oninput=upd;$('#qm').onclick=()=>{r.value=Math.max(0,+r.value-1);upd()};$('#qp').onclick=()=>{r.value=Math.min(max,+r.value+1);upd()};
  $('#qc').onclick=closeSheet;
  $('#qok').onclick=()=>{
   const n=+r.value;if(!n)return;
-  if(mode==='buy'){S.cash-=n*price;addInv(S.inv,id,n,price);log(`Bought ${n} ${g.pl} for ${R(n*price)}.`);play('buy');toast(`Loaded ${n} ${g.pl}`)}
-  if(mode==='sell'){S.cash+=n*price;const pr=(price-S.inv[id].cost)*n;takeInv(S.inv,id,n);log(`Sold ${n} ${g.pl} for ${R(n*price)} (${pr>=0?'profit':'loss'} ${R(Math.abs(pr))}).`);play('cash');toast(`${pr>=0?'Profit':'Loss'} ${R(Math.abs(pr))}`)}
+  if(mode==='buy'){S.cash-=n*price;addInv(S.inv,id,n,price);S.fresh=S.fresh||{};S.fresh[id]=(S.fresh[id]||0)+n;log(`Bought ${n} ${g.pl} for ${R(n*price)}.`);play('buy');toast(`Loaded ${n} ${g.pl}`)}
+  if(mode==='sell'){const f=freshQ(id),a=Math.min(n,own(id)-f),got=sellTot(id,n);S.cash+=got;const pr=got-S.inv[id].cost*n;if(S.fresh)S.fresh[id]=Math.max(0,f-(n-a));takeInv(S.inv,id,n);log(`Sold ${n} ${g.pl} for ${R(got)} (${pr>=0?'profit':'loss'} ${R(Math.abs(pr))}).`);play('cash');toast(`${pr>=0?'Profit':'Loss'} ${R(Math.abs(pr))}`)}
   if(mode==='unload'){addInv(S.yard.inv,id,n,S.inv[id].cost);takeInv(S.inv,id,n);log(`Unloaded ${n} ${g.pl} at the yard.`);play('buy')}
   if(mode==='load'){addInv(S.inv,id,n,S.yard.inv[id].cost);takeInv(S.yard.inv,id,n);log(`Loaded ${n} ${g.pl} from the yard.`);play('buy')}
   save();closeSheet();refresh();if(back)back();
@@ -882,7 +885,7 @@ function vMarket(){
   if(last!=null&&last!==p){const d=p-last;tr=`<small class="${d>0?'up':'dn'}">${d>0?'▲':'▼'} ${R(Math.abs(d))} since last visit</small>`}
   else if(S.haggle)tr=`<small>buy ${R(buyP(g.id))} · sell ${R(sellP(g.id))}</small>`;
   let ow;
-  if(o){const c=S.inv[g.id].cost,d=sellP(g.id)-c;ow=`On the ${rig()}: <b>${o}</b> · paid ${R(c)} · <span class="${d>=0?'up':'dn'}">${d>=0?'+':'−'}${R(Math.abs(d))} each</span>`}
+  if(o){const c=S.inv[g.id].cost,d=(freshQ(g.id)<o?sellP(g.id):Math.min(sellP(g.id),buyP(g.id)))-c;ow=`On the ${rig()}: <b>${o}</b> · paid ${R(c)} · <span class="${d>=0?'up':'dn'}">${d>=0?'+':'−'}${R(Math.abs(d))} each</span>`}
   else ow=`${g.sp} space each${yq(g.id)?` · ${yq(g.id)} in yard`:''}`;
   return `<div class="mi"><div class="nm"><b>${g.name}</b>${tag}${inS?'':'<span class="tag out">sold out</span>'}<small>${g.unit}</small></div><div class="pr"><b>${R(p)}</b>${tr}</div>
    <div class="meter" aria-hidden="true"><i style="left:${pos}%"></i></div>
